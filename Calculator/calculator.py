@@ -12,7 +12,7 @@ class info:
     def __init__(self) -> None:
         pass
 
-    def show():
+    def show(self):
         print('\n'*100)
         print("""
               █▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█
@@ -137,11 +137,11 @@ class operate:
 
 
 total = 0
-
-info.show()
+inf = info()
+inf.show()
 
 while True:
-    operator = calculator.show_and_ask(total)
+    operator = calculator.show_and_ask(total)  # type: ignore
 
     if operator == '=':
         print("\n        Your final result is : {}\n".format(total))
@@ -149,7 +149,7 @@ while True:
         break
 
     elif operator == 'info':
-        info.show()
+        inf.show()
         continue
 
     total = operate(operator).calculate(total)
