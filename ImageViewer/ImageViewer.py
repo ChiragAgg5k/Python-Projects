@@ -39,6 +39,10 @@ def forward():
             printImage.grid_forget()
             printImage = tk.Label(image=imgList[iterator])  # type: ignore
             printImage.grid(row=0, column=0, columnspan=3)
+            backButton.configure(state=tk.NORMAL)
+
+        if iterator==(len(imgList)-1):
+            forwardButton.configure(state=tk.DISABLED)
 
     except IndexError:
         pass
@@ -54,6 +58,10 @@ def backward():
             printImage.grid_forget()
             printImage = tk.Label(image=imgList[iterator])  # type: ignore
             printImage.grid(row=0, column=0, columnspan=3)
+            forwardButton.configure(state=tk.NORMAL)
+
+        if iterator==0:
+            backButton.configure(state=tk.DISABLED)
 
     except IndexError:
         pass
@@ -61,7 +69,7 @@ def backward():
 
 exitButton = tk.Button(root, text="Exit", command=root.quit, padx=5, pady=10)
 forwardButton = tk.Button(root, text=">>", padx=5, pady=10, command=forward)
-backButton = tk.Button(root, text="<<", padx=5, pady=10, command=backward)
+backButton = tk.Button(root, text="<<", padx=5, pady=10, command=backward,state=tk.DISABLED)
 
 # reducing size of all images
 for i in range(len(imgList)):
