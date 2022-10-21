@@ -113,6 +113,7 @@ def showImages(ques):
 # Main code starts from here
 
 root = tk.Tk()
+root.eval('tk::PlaceWindow . center')
 root.title("Image Viewer - by ChiragAgg5k")
 
 # os.path. blah blah gets full path of the current working directory
