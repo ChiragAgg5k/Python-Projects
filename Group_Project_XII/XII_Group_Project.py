@@ -1,6 +1,6 @@
 import sys  # module imported to use sys.exit()
 
-import mysql.connector  # type: ignore
+import mysql.connector
 # module to connect this py script with mysql servers
 
 import random  # module to generate random values
@@ -73,7 +73,7 @@ try:
     val2 = []
     mycursor.execute("select SNo from locations")
     myresult = mycursor.fetchall()
-    len_sno = len(myresult)
+    len_sno = len(myresult)  # type: ignore
     for i in range(len_sno):
         road_cost = 1000 * (random.randrange(10, 50))
         rail_cost = 1000 * (random.randrange(20, 60))
