@@ -1,7 +1,7 @@
 import secrets
 import string
 
-all_options = string.ascii_lowercase + string.ascii_uppercase + string.digits + '~`!@#$%^&*()_-+={[}]|\:;<,>.?/'
+all_options = string.ascii_lowercase + string.ascii_uppercase + string.digits + "~`!@#$%^&*()_-+={[}]|:;\<,>.?/"
 passwords = []
 
 print("""
@@ -52,7 +52,7 @@ while True:
 
     if cont == 'n':
 
-        with open("StoredPasswords.txt", 'w+') as f:
+        with open("StoredPasswords.txt", 'w') as f:
             for pos, p in enumerate(passwords):
                 f.write(f"{pos + 1} : {p}\n")
 
