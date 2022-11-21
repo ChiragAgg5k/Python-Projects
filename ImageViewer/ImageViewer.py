@@ -1,8 +1,11 @@
+# /* cSpell:disable */
+
 import os
 import tkinter as tk
 from tkinter import filedialog as fd
 
-from PIL import ImageTk, Image
+from PIL import Image, ImageTk
+
 
 def forward():
     global iterator
@@ -19,7 +22,7 @@ def forward():
             backButton.configure(state=tk.NORMAL)
             statusText.set(f"Image {iterator+1} of {len(imgList)}")
 
-        if iterator == (len(imgList)-1):
+        if iterator == (len(imgList) - 1):
             forwardButton.configure(state=tk.DISABLED)
 
     except IndexError:
@@ -61,7 +64,7 @@ def showImages(ques):
 
     if ques:
         text = tk.Label(text="Select a folder in the dialog box")
-        text.pack(padx=50,pady=50)
+        text.pack(padx=50, pady=50)
         dirLocation = fd.askdirectory(initialdir=os.getcwd(), title="Select a folder")
         text.pack_forget()
     else:
@@ -70,11 +73,10 @@ def showImages(ques):
     try:
         for images in os.listdir(dirLocation):
             if images.endswith(tuple(allowed_extentions)):
-                imgList.append(Image.open(dirLocation+"/"+images))
+                imgList.append(Image.open(dirLocation + "/" + images))
 
     except FileNotFoundError:
-        tk.Label(text="No image found.", padx=50,
-                 pady=50).grid(column=0, row=1)
+        tk.Label(text="No image found.", padx=50, pady=50).grid(column=0, row=1)
         return
 
     # creating a status bar that shows the current image we are one
@@ -99,26 +101,31 @@ def showImages(ques):
         backButton.grid(row=1, column=0)
         forwardButton.grid(row=1, column=2)
 
-        workingDir = tk.Label(root, text="Working directory = "+dirLocation, anchor=tk.W)
+        workingDir = tk.Label(
+            root, text="Working directory = " + dirLocation, anchor=tk.W
+        )
         workingDir.grid(row=2, column=0, columnspan=2, sticky=tk.W)
 
-        status.grid(row=2, column=1, columnspan=2, sticky=tk.W+tk.E)
+        status.grid(row=2, column=1, columnspan=2, sticky=tk.W + tk.E)
 
-        if len(imgList)==1:
+        if len(imgList) == 1:
             forwardButton.config(state=tk.DISABLED)
 
     else:
         tk.Label(text="No images found.").grid(row=0, column=0, padx=50, pady=50)
 
+
 # Main code starts from here
 
 root = tk.Tk()
-root.eval('tk::PlaceWindow . center')
+root.eval("tk::PlaceWindow . center")
 root.title("Image Viewer - by ChiragAgg5k")
 
 # os.path. blah blah gets full path of the current working directory
 try:
-    titleImage = ImageTk.PhotoImage(Image.open(os.path.dirname(os.path.realpath(__file__))+"/Title.png"))
+    titleImage = ImageTk.PhotoImage(
+        Image.open(os.path.dirname(os.path.realpath(__file__)) + "/Title.png")
+    )
     startLabel = tk.Label(image=titleImage)
 except FileNotFoundError:
     startLabel = tk.Label(text="Image Viewer", font=("Arial", 25))
@@ -130,7 +137,9 @@ startLabel.grid(row=0, column=0, columnspan=2, padx=50, pady=50)
 selectFolderButton = tk.Button(text="Select a folder", command=lambda: showImages(True))
 selectFolderButton.grid(row=1, column=0, pady=20)
 
-useCurrentButton = tk.Button(text="Use current folder", command=lambda: showImages(False))
+useCurrentButton = tk.Button(
+    text="Use current folder", command=lambda: showImages(False)
+)
 useCurrentButton.grid(row=1, column=1, pady=20)
 
 
@@ -141,6 +150,8 @@ iterator = 0
 # defining buttons
 exitButton = tk.Button(root, text="Exit", command=root.quit, padx=5, pady=10)
 forwardButton = tk.Button(root, text=">>", padx=5, pady=10, command=forward)
-backButton = tk.Button(root, text="<<", padx=5, pady=10,command=backward, state=tk.DISABLED)
+backButton = tk.Button(
+    root, text="<<", padx=5, pady=10, command=backward, state=tk.DISABLED
+)
 
 root.mainloop()
